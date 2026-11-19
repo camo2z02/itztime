@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Z time</title>
+<link rel="icon" href="clock.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="alert" role="alert"><span id="alertMsg"></span><button class="btn" id="alertOff">Toʻxtatish</button></div>
+<main>
+  <h1>Vaqt xonasi</h1>
+  <p class="sub">Soat, taymer, sekundomer va budilnik</p>
+  <div class="rule"></div>
+  <nav role="tablist" aria-label="Boʻlimlar">
+    <button class="tab" role="tab" data-t="soat">Soat</button>
+    <button class="tab" role="tab" data-t="taymer">Taymer</button>
+    <button class="tab" role="tab" data-t="sekundomer">Sekundomer</button>
+    <button class="tab" role="tab" data-t="budilnik">Budilnik</button>
+  </nav>
+  <div class="tools">
+    <button class="btn" id="sndBtn"></button>
+    <button class="btn" id="themeBtn">Yorugʻ / qorongʻi</button>
+    <button class="btn" id="fsBtn">Toʻliq ekran</button>
+  </div>
+
+  <section class="panel" id="soat">
+    <svg id="face" viewBox="0 0 200 200" role="img" aria-label="Analog soat"></svg>
+    <div class="big mono" id="digital">00:00:00</div>
+    <div class="date" id="dateTxt"></div>
+    <div class="row"><button class="btn" id="fmt">12 / 24 soat</button></div>
+    <div class="world" id="world"></div>
+    <div class="row"><select id="zoneSel" aria-label="Shahar tanlash"></select><button class="btn" id="zoneAdd">Shahar qoʻshish</button></div>
+  </section>
+
+  <section class="panel" id="taymer" hidden>
+    <div class="ringbox">
+      <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="none" stroke="var(--line)" stroke-width="6"/><circle id="ring" cx="100" cy="100" r="88" fill="none" stroke="var(--brass)" stroke-width="6" stroke-linecap="round" stroke-dasharray="552.9" stroke-dashoffset="0" transform="rotate(-90 100 100)"/></svg>
+      <div class="big mono" id="tDisp">00:05:00</div>
+    </div>
+    <p id="tLabel" aria-live="polite"></p>
+    <div class="fields">
+      <label>soat<input type="number" id="th" min="0" max="99" value="0"></label>
+      <label>daqiqa<input type="number" id="tm" min="0" max="999" value="5"></label>
+      <label>soniya<input type="number" id="ts" min="0" max="59" value="0"></label>
+    </div>
+    <div class="row" id="presets">
+      <button class="btn" data-m="1">1 daq</button><button class="btn" data-m="5">5 daq</button><button class="btn" data-m="10">10 daq</button><button class="btn" data-m="25">25 daq</button><button class="btn" data-m="60">1 soat</button>
+    </div>
+    <div class="row"><button class="btn main" id="tGo">Boshlash</button><button class="btn warn" id="tReset">Tiklash</button><button class="btn" id="pomo">Pomodoro: oʻchiq</button></div>
+    <p class="foot">Tugmalar: Probel — boshlash/toʻxtatish, R — tiklash</p>
+  </section>
+
+  <section class="panel" id="sekundomer" hidden>
+    <div class="big mono" id="sDisp">00:00.00</div>
+    <div class="row"><button class="btn main" id="sGo">Boshlash</button><button class="btn" id="sLap">Aylanish</button><button class="btn warn" id="sReset">Tiklash</button></div>
+    <ol id="laps"></ol>
+    <p class="empty" id="lapEmpty">Aylanishlar shu yerda koʻrinadi.</p>
+    <div class="row"><button class="btn" id="lapCopy">Aylanishlarni nusxalash</button></div>
+    <p class="foot">Tugmalar: Probel — boshlash/toʻxtatish, L — aylanish, R — tiklash</p>
+  </section>
+
+  <section class="panel" id="budilnik" hidden>
+    <div class="fields" style="align-items:end">
+      <label>vaqt<input type="time" id="alarmTime" value="07:00"></label>
+      <label>nomi<input type="text" id="alarmLabel" placeholder="Masalan: dars" maxlength="40"></label>
+      <button class="btn main" id="alarmAdd">Qoʻshish</button>
+    </div>
+    <ul id="alarms"></ul>
+    <p class="empty" id="alarmEmpty">Hozircha budilnik yoʻq.</p>
+    <p class="foot">Budilnik sahifa ochiq turganda ishlaydi.</p>
+  </section>
+  <p class="foot">1–4 raqamli tugmalar boʻlimlarni almashtiradi.</p>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
